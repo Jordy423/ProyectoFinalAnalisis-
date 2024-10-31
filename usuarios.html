@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Roles - Sistema de Nómina</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #e0f7fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #0288d1;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        form {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus {
+            border-color: #0288d1;
+            outline: none;
+        }
+        button {
+            background-color: #26a69a;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #80cbc4;
+            transform: translateY(-2px);
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #0288d1;
+            color: white;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            width: 100%;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Asignación de Roles</h1>
+    </header>
+
+    <section>
+        <h2>Asignar Rol a Usuario</h2>
+        <form id="roleForm">
+            <label for="name">Nombre del Usuario:</label>
+            <input type="text" id="name" required>
+
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" required>
+
+            <label for="role">Rol:</label>
+            <select id="role" required>
+                <option value="Admin">Administrador</option>
+                <option value="Empleado">Empleado</option>
+                <option value="Supervisor">Supervisor</option>
+            </select>
+
+            <button type="submit">Asignar Rol</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 T Consulting, S.A. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.getElementById('roleForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const nombre = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const rol = document.getElementById('role').value;
+
+            try {
+                const response = await fetch('http://localhost:3000/usuarios', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nombre, email, rol })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    alert(data.message);
+                    document.getElementById('roleForm').reset();
+                } else {
+                    console.error('Error en la solicitud:', data.error);
+                    alert('Error al agregar el usuario.');
+                }
+            } catch (error) {
+                console.error('Error al conectar con el servidor:', error);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Nómina</title>
+
+    <style>
+        /* Estilo general */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #0288d1;
+            color: white;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #payrollResult {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cálculo de Nómina</h1>
+    </header>
+
+    <form id="payrollForm">
+        <label for="employee">Seleccionar Empleado:</label>
+        <select id="employee">
+            <!-- Opciones generadas dinámicamente -->
+        </select>
+
+        <label for="workedDays">Días Trabajados:</label>
+        <input type="number" id="workedDays" required>
+
+        <label for="extraHours">Horas Extras:</label>
+        <input type="number" id="extraHours" required>
+
+        <button type="submit">Calcular Nómina</button>
+    </form>
+
+    <div id="payrollResult">
+        <h3>Resultado de Nómina</h3>
+        <p id="salaryOutput"></p>
+    </div>
+    <footer>
+        <p>&copy; 2024 T Consulting, S.A. Todos los derechos reservados.</p>
+    </footer>
+    <a href="principal.html">Volver al menú principal</a>
+
+    <script type="module" src="script2.js"></script>
+</body>
+</html>

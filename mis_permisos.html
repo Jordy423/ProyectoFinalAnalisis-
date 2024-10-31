@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de Permiso</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input:focus, select:focus {
+            border-color: #4A90E2;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #357ABD;
+        }
+
+        .alert {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Solicitud de Permiso</h1>
+        <form id="formPermiso">
+            <label for="empleadoId">ID del Empleado</label>
+            <input type="number" id="empleadoId" placeholder="Ingrese el ID del empleado" required>
+
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" placeholder="Ingrese el nombre completo" required>
+
+            <label for="cargo">Cargo</label>
+            <input type="text" id="cargo" placeholder="Ingrese el cargo del empleado" required>
+
+            <label for="permiso">Tipo de Permiso</label>
+            <select id="permiso" required>
+                <option value="">Seleccione un permiso</option>
+                <option value="Enfermedad">Enfermedad</option>
+                <option value="Vacaciones">Vacaciones</option>
+                <option value="Embarazo">Embarazo</option>
+                <option value="Otro">Otro</option>
+            </select>
+
+            <button type="submit">Enviar Solicitud</button>
+        </form>
+        <div class="alert" id="alert"></div>
+    </div>
+    <script src = "mis_permisos.js"></script>
+    </body>
+    </html>

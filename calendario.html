@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario Personalizado</title>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calendario Personalizado</h1>
+    <button id="authorize_button" style="display: none;">Authorize</button>
+    <button id="signout_button" style="display: none;">Sign Out</button>
+    <button id="add_event_button" style="display: none;">Add Event</button>
+
+    <iframe src="https://calendar.google.com/calendar/embed?src=tu_calendario_id&ctz=America%2FMexico_City" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+    <script>
+        const CLIENT_ID = 'TU_CLIENT_ID';
+        const API_KEY = 'TU_API_KEY';
+        const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+        const SCOPES = "https://www.googleapis.com/auth/calendar.events";
+
+        function handleClientLoad() {
+            gapi.load("client:auth2", initClient);
+        }
+
+        function initClient() {
+            gapi.client.init({
+                apiKey: API_KEY,
+                clientId: CLIENT_ID,
+                discoveryDocs: DISCOVERY_DOCS,
+                scope: SCOPES,
+            }).then(() => {
+                // Listen for sign-in state changes
+                gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+                updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+                
+                document.getElementById('authorize_button').onclick = handleAuthClick;
+                document.getElementById('signout_button').onclick = handleSignoutClick;
+                document.getElementById('add_event_button').onclick = addEvent; // Llama a la función de agregar evento
+            });
+        }
+
+        function updateSigninStatus(isSignedIn) {
+            if (isSignedIn) {
+                document.getElementById('authorize_button').style.display = 'none';
+                document.getElementById('signout_button').style.display = 'block';
+                document.getElementById('add_event_button').style.display = 'block'; // Muestra el botón para agregar eventos
+            } else {
+                document.getElementById('authorize_button').style.display = 'block';
+                document.getElementById('signout_button').style.display = 'none';
+                document.getElementById('add_event_button').style.display = 'none';
+            }
+        }
+
+        function handleAuthClick(event) {
+            gapi.auth2.getAuthInstance().signIn();
+        }
+
+        function handleSignoutClick(event) {
+            gapi.auth2.getAuthInstance().signOut();
+        }
+
+        function addEvent() {
+            const event = {
+                'summary': 'Reunión de equipo',
+                'location': 'Oficina',
+                'description': 'Discutir los proyectos en curso.',
+                'start': {
+                    'dateTime': '2024-11-01T10:00:00-07:00', // Cambia a la fecha y hora deseadas
+                    'timeZone': 'America/Los_Angeles',
+                },
+                'end': {
+                    'dateTime': '2024-11-01T11:00:00-07:00',
+                    'timeZone': 'America/Los_Angeles',
+                },
+                'reminders': {
+                    'useDefault': false,
+                    'overrides': [
+                        {'method': 'email', 'minutes': 10},
+                        {'method': 'popup', 'minutes': 10},
+                    ],
+                },
+            };
+
+            const request = gapi.client.calendar.events.insert({
+                'calendarId': 'primary',
+                'resource': event,
+            });
+
+            request.execute(event => {
+                console.log('Event created: ' + event.htmlLink);
+                alert('Evento creado: ' + event.htmlLink);
+            });
+        }
+
+        handleClientLoad();
+    </script>
+</body>
+</html>

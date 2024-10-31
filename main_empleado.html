@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal del Empleado</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Barra lateral -->
+    <aside class="sidebar">
+        <div class="profile">
+            <img src="avatar.png" alt="Perfil">
+            <p>Empleado</p>
+            <p>test@test.com</p>
+        </div>
+        <nav>
+            <ul>
+        
+                <li><a href="calendario.html"><i class="fa fa-umbrella"></i> Calendario</a></li>
+                <li><a href="buscar.html"><i class="fa fa-user"></i> Ver Información</a></li>
+                <li><a href="mis_permisos.html"><i class="fa fa-clock"></i> Solicitar Permisos</a></li>
+                
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Encabezado -->
+    <header class="header">
+        <h1>Bienvenido al Portal del Empleado</h1>
+        <div class="user-menu">
+            
+            <a href="login.html"><i class="fa fa-sign-out-alt"></i>Cerrar sesión</a>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main>
+        <section id="about">
+            <h2>Acerca de T Consulting, S.A.</h2>
+            <p>T Consulting, S.A. es una empresa dedicada a brindar soluciones integrales en consultoría y gestión de recursos humanos. Nuestro objetivo es facilitar la administración de personal mediante el uso de tecnología innovadora y herramientas eficientes.</p>
+
+            <h3>Misión</h3>
+            <p>Proporcionar servicios de consultoría y administración de nómina que optimicen los procesos de recursos humanos y mejoren la satisfacción de los empleados.</p>
+
+            <h3>Visión</h3>
+            <p>Ser líderes en el sector de consultoría en recursos humanos, reconocidos por nuestra calidad, innovación y compromiso con nuestros clientes.</p>
+        </section>
+
+        <section id="notificaciones">
+            <h2>Notificaciones</h2>
+            <table id="tablaNotificaciones">
+                <thead>
+                    <tr>
+                        <th>ID Permiso</th>
+                        <th>ID Empleado</th>
+                        <th>Nombre</th>
+                        <th>Cargo</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se llenarán las notificaciones con JavaScript -->
+                </tbody>
+            </table>
+        </section>
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2024 T Consulting, S.A. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

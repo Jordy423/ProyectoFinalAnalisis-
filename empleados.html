@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Empleados</title>
+    <style>
+        /* Reset de estilos predeterminados del navegador */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #005f73;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 5px solid #0a9396; /* Límite inferior */
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        main {
+            padding: 40px 20px;
+        }
+
+        main h2 {
+            text-align: center;
+            font-size: 2.2em;
+            color: #005f73;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd; /* Límite entre empleados */
+        }
+
+        li:last-child {
+            border-bottom: none; /* Eliminar límite del último elemento */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lista de Empleados</h1>
+    </header>
+    
+    <main>
+        <ul id="empleadosList"></ul>
+    </main>
+
+    <script>
+        // Realizamos una solicitud para obtener los empleados
+        fetch('http://localhost:3000/empleados')
+            .then(response => response.json())
+            .then(data => {
+                const empleadosList = document.getElementById('empleadosList');
+                data.forEach(empleado => {
+                    const li = document.createElement('li');
+                    li.textContent = `${empleado.nombre} - ${empleado.puesto} - $${empleado.salario}`;
+                    empleadosList.appendChild(li);
+                });
+            })
+            .catch(err => console.error('Error al obtener los empleados:', err));
+    </script>
+</body>
+</html>
